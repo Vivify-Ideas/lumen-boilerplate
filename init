@@ -45,13 +45,6 @@ if [ $? -ne 0 ]; then
     err "Error while installing dependencies."
 fi
 
-log "Generating app key"
-docker exec lumen php artisan key:generate && \
-docker exec lumen php artisan cache:clear
-if [ $? -ne 0 ]; then
-    err "Error while generating app key."
-fi
-
 log "Generating JWT secret key"
 docker exec lumen php artisan jwt:secret
 if [ $? -ne 0 ]; then
@@ -61,8 +54,3 @@ fi
 log "Running database migrations"
 docker exec lumen php artisan migrate
 
-log "Setting permissions for storage and bootstrap cache, this might ask you for your password"
-sudo chmod -R 777 src/storage src/bootstrap/cache
-if [ $? -ne 0 ]; then
-    err "Error while setting permissions."
-fi
