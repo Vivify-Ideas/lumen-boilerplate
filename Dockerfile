@@ -18,5 +18,4 @@ RUN composer install --no-dev --no-scripts
 # Chown storage and boostrap cache as www-data user/group
 RUN chown -R www-data:www-data \
     /app/storage \
-    /app/bootstrap/cache \
-    /app/public/uploads
+    /app/bootstrap/cache
